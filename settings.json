@@ -1,5 +1,19 @@
 {
     "ORG": "supabase",
-    "REPO": "supabase",
-    "type": "discussions"
+    "type": "issues",
+    "repos": [
+        "supbase/supabase",
+        "supbase/supabase-js",
+        "supbase/postgrest-js",
+        "supabase/gotrue"
+    ],
+    "supabase": {
+        "host": "http://127.0.0.1:54321"
+    },
+    "db": {
+        "host": "0.0.0.0",
+        "port": 54322,
+        "name": "postgres",
+        "user": "postgres"
+    }
 }

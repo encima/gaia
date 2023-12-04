@@ -1,12 +1,15 @@
 from transformers import BertTokenizer, BertModel
 import torch
 import psycopg2
-from config import settings
 from supabase import create_client, Client
+import sys
+
+sys.path.append('../')
+from config import settings
 
 # Supabase setup
-url: str = "http://127.0.0.1:54321"  # Replace with your Supabase project URL
-key: str = settings['SB_LOCAL_TOKEN']
+url: str = settings['supabase']['host']  # Replace with your Supabase project URL
+key: str = settings['supabase']['token']
 supabase: Client = create_client(url, key)
 
 def generate_embedding(text):
@@ -16,12 +19,12 @@ def generate_embedding(text):
     outputs = model(**inputs)
     return outputs.last_hidden_state.mean(dim=1).detach().numpy()[0]
 
-conn = psycopg2.connect(host='0.0.0.0', dbname="postgres", user="postgres", password="postgres", port=54322)
+conn = psycopg2.connect(host=settings['db']['host'], dbname=settings['db']['name'], user=settings['db']['user'], password=settings['db']['pwd'], port=settings['db']['port'])
 cursor = conn.cursor()
 
 cursor.execute("SELECT id, title, body FROM issues where id not in (select issue_id from issue_embeds)")
 issues = cursor.fetchall()
-
+print(len(issues))
 for issue in issues:
     embedding = generate_embedding(issue[1] + ": " + issue[2])
     e_data = {

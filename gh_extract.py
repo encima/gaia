@@ -5,7 +5,6 @@ from config import settings
 token = settings['GH_TOKEN']  # Your GitHub Personal Access Token
 headers = {'Authorization': f'Bearer {token}'}
 graphql_url = 'https://api.github.com/graphql'
-repositories = ['supabase/supabase']  # List of repositories in 'username/repo' format
 
 # Function to execute GraphQL queries
 def run_query(query, variables):
@@ -142,7 +141,7 @@ def fetch_issues_and_write_to_json(repo):
 
 # Main function
 def main():
-    for repo in repositories:
+    for repo in settings['repos']:
         fetch_issues_and_write_to_json(repo)
 
 if __name__ == '__main__':
