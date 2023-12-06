@@ -22,11 +22,14 @@ issues/discussions and comments to a local JSON file. From there, you can ingest
 the raw content into Postgres. You can then generate embeddings for each and
 store them with `pgvector`.
 
+Some resources can be found within Supabase's [docs](https://supabase.com/blog/openai-embeddings-postgres-vector)
+
 Aaaand then:
 
-1. Run `pipenv install`
-2. Run `supabase init`
-3. Run `pipenv run python3 gh_extract.py`
-4. Data will be in `repos/`
-5. Run `pipenv run python3 generate.py`
-6. Run `pipenv run python3 sb_ingest.py`
+1. Run `make setup`
+2. Run `make extract` - to download the issues and comments
+3. Data will be in `repos/`
+4. Run `make ingest` - to insert the data into postgres
+5. Run `make generate` - to generate embeddings and insert them into postgres
+6. Run `pipenv run python3 query.py <SEARCH_TERM>` - to search for similar
+   issues

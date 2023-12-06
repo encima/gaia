@@ -6,7 +6,9 @@ create or replace function match_issues (
 returns table (
   id bigint,
   issue_id varchar, 
+  title text,
   content text,
+  url text,
   similarity float
 )
 language sql stable
@@ -14,7 +16,9 @@ as $$
   select
     issue_embeds.id,
     issue_embeds.issue_id,
+    issues.title as title,
     issues.body as content,
+    issues.url as url,
     1 - (issue_embeds.embedding <=> query_embedding) as similarity
   from issue_embeds
   JOIN issues ON issues.id = issue_embeds.issue_id

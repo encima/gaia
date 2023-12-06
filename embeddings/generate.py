@@ -22,17 +22,18 @@ def generate_embedding(text):
 conn = psycopg2.connect(host=settings['db']['host'], dbname=settings['db']['name'], user=settings['db']['user'], password=settings['db']['pwd'], port=settings['db']['port'])
 cursor = conn.cursor()
 
-cursor.execute("SELECT id, title, body FROM issues where id not in (select issue_id from issue_embeds)")
+cursor.execute("SELECT i.title, c.issue_id, c.id, c.body FROM issue_comments c join issues i on i.id = c.issue_id where c.id not in (select comment_id from issue_comment_embeds)")
 issues = cursor.fetchall()
 print(len(issues))
 for issue in issues:
-    embedding = generate_embedding(issue[1] + ": " + issue[2])
+    embedding = generate_embedding(issue[0] + ": " + issue[3])
     e_data = {
-        'issue_id': issue[0],
+        'issue_id': issue[1],
+        'comment_id': issue[2],
         'embedding': embedding.tolist()
     }
     try:
-        response = supabase.table('issue_embeds').insert(e_data).execute()
+        response = supabase.table('issue_comment_embeds').insert(e_data).execute()
         print(response)
     except Exception as e:
         print(f"Error inserting {issue[0]}: {response['content']}")

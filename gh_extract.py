@@ -35,6 +35,12 @@ def fetch_all_comments(owner, repo, issue_number):
                     }
                     createdAt
                     url
+                    reactionGroups {
+                      content
+                      users {
+                        totalCount
+                      }
+                    }
                   }
                 }
                 pageInfo {
@@ -91,6 +97,13 @@ def fetch_issues_and_write_to_json(repo):
                       }
                       createdAt
                       url
+                      category
+                      reactionGroups {
+                        content
+                        users {
+                          totalCount
+                        }
+                      }
                       comments(first: 100) {
                         totalCount
                         edges {
@@ -101,6 +114,12 @@ def fetch_issues_and_write_to_json(repo):
                               login
                             }
                             url
+                            reactionGroups {
+                              content
+                              users {
+                                totalCount
+                              }
+                            }
                           }
                         }
                         pageInfo {

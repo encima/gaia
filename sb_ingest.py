@@ -4,7 +4,7 @@ from config import settings
 
 # Supabase setup
 url: str = "http://127.0.0.1:54321"  # Replace with your Supabase project URL
-key: str = settings['SB_LOCAL_TOKEN']
+key: str = settings['supabase']['token']
 supabase: Client = create_client(url, key)
 
 for repo in settings['repos']:
