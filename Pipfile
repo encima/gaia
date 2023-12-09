@@ -13,6 +13,8 @@ supabase = "*"
 psycopg2 = "*"
 torch = "*"
 transformers = "*"
+flask = "*"
+flask-cors = "*"
 
 [dev-packages]
 

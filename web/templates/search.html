@@ -1,0 +1,103 @@
+<!-- templates/search.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SupaSearch</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f2f2f2;
+        }
+
+        .search-container {
+            text-align: center;
+        }
+
+        #search-input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 300px;
+        }
+
+        #search-btn {
+            padding: 10px 20px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        #search-btn:hover {
+            background-color: #0056b3;
+        }
+
+        #results-list {
+            list-style-type: none;
+            padding: 0;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        #results-list li {
+            background-color: white;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <input type="text" id="search-input" placeholder="Enter search term">
+        <button id="search-btn">Search</button>
+    </div>
+    <ul id="results-list">
+    </ul>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var searchBtn = document.getElementById('search-btn');
+            var searchInput = document.getElementById('search-input');
+            var resultsList = document.getElementById('results-list');
+
+            searchBtn.addEventListener('click', function () {
+                var searchTerm = searchInput.value;
+                fetch('/api/gen-embed?text=' + encodeURIComponent(searchTerm))
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (data) {
+                        resultsList.innerHTML = '';
+                        data.forEach(item => {
+                            const li = document.createElement('li');
+                            const anchor = document.createElement('a');
+                            anchor.href = item.url;
+                            anchor.textContent = item.title;
+                            anchor.target = "_blank"; // Open in new tab
+                            li.appendChild(anchor);
+                            resultsList.appendChild(li);
+                        });
+                    })
+                    .catch(function (error) {
+                        console.error('Error:', error);
+                    });
+            });
+        });
+
+    </script>
+</body>
+
+</html>
