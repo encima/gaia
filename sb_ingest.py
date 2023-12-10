@@ -1,6 +1,6 @@
 from supabase import create_client, Client
 import json
-from config import settings
+from .web.config import settings
 
 # Supabase setup
 url: str = "http://127.0.0.1:54321"  # Replace with your Supabase project URL

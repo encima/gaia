@@ -13,7 +13,7 @@ from config import settings
 app = Flask(__name__)
 CORS(app)
 
-url: str = "http://127.0.0.1:54321"  # Replace with your Supabase project URL
+url: str = settings['supabase']['url']
 key: str = settings['supabase']['token']
 supabase: Client = create_client(url, key)
 

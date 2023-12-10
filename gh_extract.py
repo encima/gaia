@@ -1,7 +1,7 @@
 import requests
 import json
-from config import settings
-# GitHub GraphQL API parameters
+from .web.config import settings
+
 token = settings['GH_TOKEN']  # Your GitHub Personal Access Token
 headers = {'Authorization': f'Bearer {token}'}
 graphql_url = 'https://api.github.com/graphql'
