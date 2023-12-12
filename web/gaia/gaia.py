@@ -1,14 +1,16 @@
+import os
+
 import reflex as rx
-import torch
 from config import settings
 from transformers import BertModel, BertTokenizer
 
 from supabase import Client, create_client
 
-
 url: str = settings["supabase"]["url"]
 key: str = settings["supabase"]["token"]
 supabase: Client = create_client(url, key)
+
+cwd = os.getcwd()
 
 
 class State(rx.State):
@@ -24,8 +26,12 @@ class State(rx.State):
             return rx.window_alert("Prompt Empty")
         self.processing, self.complete = True, False
         try:
-            tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
-            model = BertModel.from_pretrained("bert-base-uncased")
+            tokenizer = BertTokenizer.from_pretrained(
+                cwd + "/gaia//transformers/bert-base-uncased-tokenizer"
+            )
+            model = BertModel.from_pretrained(
+                cwd + "/gaia/transformers/bert-base-uncased-model"
+            )
             inputs = tokenizer(
                 self.prompt, return_tensors="pt", truncation=True, max_length=512
             )
@@ -51,7 +57,6 @@ def get_item(item):
     return rx.list_item(
         rx.hstack(
             rx.link(item[0], href=item[1]),
-
         ),
     )
 

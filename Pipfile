@@ -13,9 +13,7 @@ supabase = "*"
 psycopg2 = "*"
 torch = "*"
 transformers = "*"
-flask = "*"
-flask-cors = "*"
-gunicorn = "*"
+reflex = "*"
 
 [dev-packages]
 

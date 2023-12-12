@@ -1,5 +1,5 @@
-
 # Ignore dynaconf secret files
 .secrets.*
 supabase/dumps/**.sql
 supabase/seed.sql
+**/*/.DS_Store
