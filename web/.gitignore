@@ -3,3 +3,5 @@
 .web
 __pycache__/
 gaia/transformers/**/*
+-gaia/transformers/download.py
+backend/**/*

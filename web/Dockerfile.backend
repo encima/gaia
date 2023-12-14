@@ -1,0 +1,37 @@
+# Use an official Python runtime as a parent image
+FROM nikolaik/python-nodejs:python3.11-nodejs21
+
+# Set the working directory in the container
+WORKDIR /usr/src/app
+
+# Copy the current directory contents into the container at /usr/src/app
+COPY . .
+
+# Install any needed packages specified in requirements.txt
+RUN pip install -r requirements.txt
+
+# Make port 8000 available to the world outside this container
+EXPOSE 8000
+
+# Define environment variable
+# ENV NAME World
+
+# Run app.py when the container launches
+CMD ["reflex", "run", "--env", "prod", "--backend-only"]
+
+
+# FROM nikolaik/python-nodejs:python3.11-nodejs21
+# USER pn
+# ARG API_URL
+# WORKDIR /app
+# COPY --chown=pn . /app
+# RUN mkdir -p /app/cache
+# ENV VIRTUAL_ENV=/app/.venv
+# ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+# RUN chown -R pn /app
+# RUN python3 -m venv $VIRTUAL_ENV
+# RUN pip install -r requirements.txt
+# ENV TRANSFORMERS_CACHE=/app/cache
+# RUN python3 -m reflex db init
+# RUN reflex init
+# CMD reflex db migrate && reflex run --env prod

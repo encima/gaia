@@ -1,7 +1,5 @@
 setup:
-    pipenv install
-	supabase init
-    supabase start
+    pipenv install && supabase init && supabase start
 
 extract:
     pipenv run python3 1_github_extract.py
@@ -17,5 +15,8 @@ config:
 
 web:
     cd web && reflex run
+
+transformers:
+    cd web/gaia/transformers && pipenv run python3 download.py
 
 all: setup extract ingest embed
