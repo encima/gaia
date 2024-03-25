@@ -1,7 +1,7 @@
 *.db
 *.py[cod]
+-gaia/transformers/download.py
 .web
 __pycache__/
-gaia/transformers/**/*
--gaia/transformers/download.py
 backend/**/*
+gaia/transformers/**/*

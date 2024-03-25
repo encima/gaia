@@ -5,15 +5,9 @@ name = "pypi"
 
 [packages]
 dynaconf = "*"
+supabase = "*"
 requests = "*"
 psycopg2-binary = "*"
-pygithub = "*"
-glom = "*"
-supabase = "*"
-psycopg2 = "*"
-torch = "*"
-transformers = "*"
-reflex = "*"
 
 [dev-packages]
 
