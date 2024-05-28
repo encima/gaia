@@ -24,7 +24,7 @@ store them with `pgvector`.
 
 Some resources can be found within Supabase's [docs](https://supabase.com/blog/openai-embeddings-postgres-vector)
 
-Aaaand then:
+And then:
 
 1. Run `make setup`
 2. Run `make extract` - to download the issues and comments
