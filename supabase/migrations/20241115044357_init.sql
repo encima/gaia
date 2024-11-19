@@ -123,6 +123,7 @@ CREATE TABLE IF NOT EXISTS "public"."issues" (
     "title" "text",
     "author" "text",
     "body" "text",
+    "state" "text",
     "opened_at" timestamp without time zone,
     "closed_at" timestamp without time zone,
     "embedding" "public"."vector"(384),
