@@ -9,7 +9,7 @@ RAISE NOTICE 'gen embed for new row : %', NEW.body;
 SELECT content::jsonb->'embedding' into embedding
   FROM http((
           'POST',
-           'http://supabase_kong_gaia:8000/functions/v1/gen_embed',
+           'https://qfsrmwxxufryrczocwuj.supabase.co/functions/v1/gen_embed',
            NULL,
            'application/json',
            jsonb_build_object('input', NEW.body)

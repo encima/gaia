@@ -86,7 +86,7 @@ enabled = true
 public = false
 file_size_limit = "50MiB"
 allowed_mime_types = ["text/csv", "text/json"]
-objects_path = "./data/repos"
+objects_path = "../data/repos"
 
 [auth]
 enabled = true
